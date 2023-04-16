@@ -7,16 +7,22 @@ Name:           python-%{pypi_name}
 Version:        %{pypi_version}
 Release:        1%{?dist}
 Summary:        The main PiKVM daemon
+ExclusiveArch:  aarch64
 
 License:        GPLv3
 URL:            https://github.com/pikvm/kvmd
-Source0:        %{pypi_name}-%{pypi_version}.tar.gz
+Source0:        %{url}/archive/v%{pypi_version}.tar.gz
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
 
-%description
+Requires:       python3dist(pyotp)
+Requires:       python3dist(qrcode)
+Requires:       python3dist(ustreamer)
+Requires:       tesseract
 
+%description
+%{summary}
 
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
@@ -24,8 +30,7 @@ Summary:        %{summary}
 
 Requires:       python3dist(setuptools)
 %description -n python3-%{pypi_name}
-
-
+%{summary}
 
 %prep
 %autosetup -n %{pypi_name}-%{pypi_version}
@@ -35,13 +40,6 @@ Requires:       python3dist(setuptools)
 
 %install
 %py3_install
-
-#%check
-#%{__python3} setup.py test
-
-#  %{python3_sitearch}/%{pypi_name}
-#  %{python3_sitearch}/%{pypi_name}-%{pypi_version}-py%{python3_version}.egg-info
-
 
 %files -n python3-%{pypi_name}
 %license LICENSE
