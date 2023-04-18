@@ -1,0 +1,13 @@
+diff -r -u kvmd-3.212-orig/kvmd/apps/__init__.py kvmd-3.212/kvmd/apps/__init__.py
+--- kvmd-3.212-orig/kvmd/apps/__init__.py	2023-04-18 12:05:38.563618589 -0400
++++ kvmd-3.212/kvmd/apps/__init__.py	2023-04-18 12:07:11.461732106 -0400
+@@ -586,7 +586,7 @@
+         "otgnet": {
+             "iface": {
+                 "net":    Option("169.254.0.0/28", type=functools.partial(valid_net, v6=False)),
+-                "ip_cmd": Option(["/usr/bin/ip"],  type=valid_command),
++                "ip_cmd": Option(["/usr/sbin/ip"],  type=valid_command),
+             },
+ 
+             "firewall": {
+Only in kvmd-3.212/kvmd/apps: __init__.py~
