@@ -44,7 +44,9 @@ Summary:        %{summary}
 
 %install
 %py3_install
-%{__cp} scripts/* %{buildroot}%{_bindir}
+%{__cp} scripts/kvmd-udev-hdmiusb-check %{buildroot}%{_bindir}
+%{__cp} scripts/kvmd-gencert %{buildroot}%{_bindir}
+%{__cp} scripts/kvmd-certbot %{buildroot}%{_bindir}
 
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/nginx/ssl
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/override.d
