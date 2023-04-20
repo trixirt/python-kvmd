@@ -52,6 +52,7 @@ Summary:        %{summary}
 %{__cp} configs/kvmd/*.yaml %{buildroot}%{_sysconfdir}/kvmd/
 %{__cp} configs/kvmd/edid/*.hex %{buildroot}%{_sysconfdir}/kvmd/
 %{__cp} configs/kvmd/*passwd %{buildroot}%{_sysconfdir}/kvmd/
+%{__cp} configs/kvmd/totp.secret %{buildroot}%{_sysconfdir}/kvmd/
 
 %{__mkdir_p} %{buildroot}%{_datadir}/kvmd/configs.default
 %{__cp} -r configs/* %{buildroot}%{_datadir}/kvmd/configs.default/
