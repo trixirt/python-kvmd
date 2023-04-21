@@ -48,6 +48,7 @@ Summary:        %{summary}
 %{__cp} scripts/kvmd-gencert %{buildroot}%{_bindir}
 %{__cp} scripts/kvmd-certbot %{buildroot}%{_bindir}
 
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/janus
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/nginx/ssl
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/override.d
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/kvmd/vnc/ssl
@@ -55,6 +56,7 @@ Summary:        %{summary}
 %{__cp} configs/kvmd/edid/*.hex %{buildroot}%{_sysconfdir}/kvmd/
 %{__cp} configs/kvmd/*passwd %{buildroot}%{_sysconfdir}/kvmd/
 %{__cp} configs/kvmd/totp.secret %{buildroot}%{_sysconfdir}/kvmd/
+%{__cp} configs/janus/* %{buildroot}%{_sysconfdir}/kvmd/janus/
 
 %{__mkdir_p} %{buildroot}%{_datadir}/kvmd/configs.default
 %{__cp} -r configs/* %{buildroot}%{_datadir}/kvmd/configs.default/
@@ -90,7 +92,6 @@ Summary:        %{summary}
 %license LICENSE
 %doc README.md
 %{_bindir}/kvmd
-%{_bindir}/kvmd-bootconfig
 %{_bindir}/kvmd-certbot
 %{_bindir}/kvmd-cleanup
 %{_bindir}/kvmd-edidconf
@@ -131,7 +132,12 @@ Requires:       python3dist(%{pypi_name})
 %files -n %{hw_name}
 
 %post -n %{hw_name}
-cp %{_datadir}/kvmd/configs.default/kvmd/main/v3-hdmi-rpi4.yaml %{_sysconfdir}/kvmd/main.yaml
+cp %{_datadir}/kvmd/configs.default/kvmd/main/v3-hdmi-rpi4.yaml %{_sysconfdir}/kvmd/tc358743-edid.hex
+cp %{_datadir}/kvmd/configs.default/kvmd/edid/v3-hdmi.hex %{_sysconfdir}/kvmd/main.yaml
+cp %{_datadir}/kvmd/configs.default/os/udev/v3-hdmi-rpi4.rules %{_udevrulesdir}/99-kvmd.rules
+cp %{_datadir}/kvmd/configs.default/os/sysctl.conf %{_sysctldir}/99-kvmd.conf
+cp %{_datadir}/kvmd/configs.default/os/module-load/v3-hdmi.conf %{_modulesloaddir}/kvmd.conf
+cp %{_datadir}/kvmd/configs.default/os/sudoers/v3-hdmi %{_sysconfdir}/sudoers/99_kvmd
 
 %postun -n %{hw_name}
 rm %{_sysconfdir}/kvmd/main.yaml
