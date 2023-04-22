@@ -132,15 +132,20 @@ Requires:       python3dist(%{pypi_name})
 %files -n %{hw_name}
 
 %post -n %{hw_name}
-cp %{_datadir}/kvmd/configs.default/kvmd/main/v3-hdmi-rpi4.yaml %{_sysconfdir}/kvmd/tc358743-edid.hex
-cp %{_datadir}/kvmd/configs.default/kvmd/edid/v3-hdmi.hex %{_sysconfdir}/kvmd/main.yaml
-cp %{_datadir}/kvmd/configs.default/os/udev/v3-hdmi-rpi4.rules %{_udevrulesdir}/99-kvmd.rules
-cp %{_datadir}/kvmd/configs.default/os/sysctl.conf %{_sysctldir}/99-kvmd.conf
-cp %{_datadir}/kvmd/configs.default/os/module-load/v3-hdmi.conf %{_modulesloaddir}/kvmd.conf
-cp %{_datadir}/kvmd/configs.default/os/sudoers/v3-hdmi %{_sysconfdir}/sudoers/99_kvmd
+cp %{_datadir}/kvmd/configs.default/kvmd/edid/v3-hdmi.hex        %{_sysconfdir}/kvmd/tc358743-edid.hex
+cp %{_datadir}/kvmd/configs.default/kvmd/main/v3-hdmi-rpi4.yaml  %{_sysconfdir}/kvmd/main.yaml
+cp %{_datadir}/kvmd/configs.default/os/modules-load/v3-hdmi.conf %{_modulesloaddir}/kvmd.conf
+cp %{_datadir}/kvmd/configs.default/os/sudoers/v3-hdmi           %{_sysconfdir}/sudoers.d/99_kvmd
+cp %{_datadir}/kvmd/configs.default/os/sysctl.conf               %{_sysctldir}/99-kvmd.conf
+cp %{_datadir}/kvmd/configs.default/os/udev/v3-hdmi-rpi4.rules   %{_udevrulesdir}/99-kvmd.rules
 
 %postun -n %{hw_name}
+rm %{_modulesloaddir}/kvmd.conf
 rm %{_sysconfdir}/kvmd/main.yaml
+rm %{_sysconfdir}/kvmd/tc358743-edid.hex
+rm %{_sysconfdir}/sudoers.d/99_kvmd
+rm %{_sysctldir}/99-kvmd.conf
+rm %{_udevrulesdir}/99-kvmd.rules
 
 %changelog
 * Sun Apr 16 2023 trix - 3.212-1
