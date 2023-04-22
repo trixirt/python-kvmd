@@ -63,8 +63,9 @@ Summary:        %{summary}
 %{__cp} -r contrib/keymaps %{buildroot}%{_datadir}/kvmd/
 %{__cp} -r extras %{buildroot}%{_datadir}/kvmd/
 
-# # % dir %{_sysconfdir}/kvmd
-# # % dir %{_datadir}/kvmd
+%{__mkdir_p} %{buildroot}%{_unitdir}
+%{__cp} configs/os/services/* %{buildroot}%{_unitdir}
+
 
 %pre  -n python3-%{pypi_name}
 %{_sbindir}/groupadd gpio
@@ -119,6 +120,20 @@ Summary:        %{summary}
 %attr(0600,kvmd,kvmd) %{_sysconfdir}/kvmd/htpasswd
 %attr(0600,kvmd-ipmi,kvmd-ipmi) %{_sysconfdir}/kvmd/ipmipasswd
 %attr(0600,kvmd-vnc,kvmd-vnc) %{_sysconfdir}/kvmd/vncpasswd
+%{_unitdir}/kvmd-bootconfig.service
+%{_unitdir}/kvmd-certbot.service
+%{_unitdir}/kvmd-certbot.timer
+%{_unitdir}/kvmd-ipmi.service
+%{_unitdir}/kvmd-janus-static.service
+%{_unitdir}/kvmd-janus.service
+%{_unitdir}/kvmd-nginx.service
+%{_unitdir}/kvmd-otg.service
+%{_unitdir}/kvmd-otgnet.service
+%{_unitdir}/kvmd-pst.service
+%{_unitdir}/kvmd-tc358743.service
+%{_unitdir}/kvmd-vnc.service
+%{_unitdir}/kvmd-watchdog.service
+%{_unitdir}/kvmd.service
 
 %global hw_name python3-%{pypi_name}-v3-rpi4
 
