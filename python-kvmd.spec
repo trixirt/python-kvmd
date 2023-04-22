@@ -66,6 +66,11 @@ Summary:        %{summary}
 %{__mkdir_p} %{buildroot}%{_unitdir}
 %{__cp} configs/os/services/* %{buildroot}%{_unitdir}
 
+%{__mkdir_p} %{buildroot}%{_sysusersdir}
+%{__cp} configs/os/sysusers.conf %{buildroot}%{_sysusersdir}/kvmd.conf
+
+%{__mkdir_p} %{buildroot}%{_tmpfilesdir}
+%{__cp} configs/os/tmpfiles.conf %{buildroot}%{_tmpfilesdir}/kvmd.conf
 
 %pre  -n python3-%{pypi_name}
 %{_sbindir}/groupadd gpio
@@ -120,6 +125,8 @@ Summary:        %{summary}
 %attr(0600,kvmd,kvmd) %{_sysconfdir}/kvmd/htpasswd
 %attr(0600,kvmd-ipmi,kvmd-ipmi) %{_sysconfdir}/kvmd/ipmipasswd
 %attr(0600,kvmd-vnc,kvmd-vnc) %{_sysconfdir}/kvmd/vncpasswd
+%{_sysusersdir}/kvmd.conf
+%{_tmpfilesdir}/kvmd.conf
 %{_unitdir}/kvmd-bootconfig.service
 %{_unitdir}/kvmd-certbot.service
 %{_unitdir}/kvmd-certbot.timer
